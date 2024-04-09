@@ -1,0 +1,57 @@
+close all; 
+clear var; 
+clc;
+x=input('Enter Input Sequence x(n): ');
+h=input('Enter Impulse Sequence h(n): ');
+n=input ('Enter block length n: ');
+N1=length(x);
+M=length (h);
+L = n-M+1;
+x=[x zeros(1,mod(-N1,L))];
+N2=length(x);
+Xi = conv(x,h);
+h=[h zeros(1,L-1)];
+H=fft(h,L+M-1);
+S=N2/L;
+index=1:L;
+X=zeros(M-1);
+for stage=1:S
+xm=[x(index) zeros(1,M-1)];
+X1=fft (xm,L+M-1);
+Y=X1.*H;
+Y=ifft(Y);
+Z=X((length(X)-M+2):length(X))+Y(1:M-1);
+%Samples Added in every stage
+X=[X(1:(stage-1)*L) Z Y(M:M+L-1)];
+index=stage*L+1:(stage+1)*L;
+end
+i=1:N1+M-1;
+X=X(i);
+%disp('Convolution Using inbuilt function is:')
+%disp(Xi)
+disp('Convolution Using Overlap Add Method is:')
+disp(X)
+subplot(2,2,1)
+stem(x);
+title ('Input Sequence x(n)')
+xlabel('n(sec)');
+ylabel('x(n)');
+grid on;
+subplot(2,2,2)
+stem(h);
+xlabel('n(sec)');
+ylabel('h(n)');
+title('Impulse Sequence h(n)');
+grid on;
+subplot(2,2,3)
+stem(Xi);
+title('Convolution Using inbuilt function ')
+xlabel('n(sec)');
+ylabel('y(n)');
+grid on;
+subplot(2,2,4)
+stem(X);
+title('Convolution Using Overlap Add Method')
+xlabel('n(sec)');
+ylabel('y(n)');
+grid on;
