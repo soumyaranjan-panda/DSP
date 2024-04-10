@@ -1,0 +1,19 @@
+clc
+clear all
+close all
+
+x=input('Input sequence - '); 
+n=length(x);
+N=128;
+psd = abs(fft(x,N).^2/n);
+stem((0:(N-1))/N,psd);
+
+xlim([0,1])
+
+xlabel('Discrete frequency')
+
+ylabel('Power')
+
+title('Power spectrum, FFT length =8')
+
+grid on

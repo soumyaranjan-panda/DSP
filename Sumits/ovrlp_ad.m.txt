@@ -1,0 +1,19 @@
+clc;
+clear all;
+close all;
+x=input('Input sequense - ');
+h=input('Impulse response of Filter - ');
+n=input('Segment size - ');
+m=length(h);
+l=n-m+1;
+x=[x zeros(1,l-mod(length(x),l))];
+k=length(x)+length(h)-1;
+y=[zeros(1,k)];
+h=[h zeros(1,l-1)]
+for i=1:(length(x))/l
+    g=[x((i-1)*l+1:(i-1)*l+l) zeros(1,m-1)]
+    c=cconv(h,g,n)
+    y=y+[zeros(1,(i-1)*l) c zeros(1,((length(x))/l - i)*l)];
+end
+disp('Output using overlap add method - ')
+disp(y)

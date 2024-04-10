@@ -1,0 +1,49 @@
+clc;
+clear all;
+close all;
+t=-10:0.2:10;
+% t1=-100:0.1:100;
+% x=2*sin(t)+3*cos(t1+2);
+% plot(t,x);
+figure(1)
+subplot(2,2,1);
+s=stem(t, sin(t));
+s.Color = [0.5 0.2 0];
+axis([-10,10,-1.2,1.2]);
+xlabel('Time');
+ylabel('sine(t)');
+title('Sine Signal');
+
+subplot(2,2,2);
+stem(t, cos(t));
+axis([-10,10,-1.2,1.2]);
+xlabel('Time');
+ylabel('cos(t)');
+title('Cosine Signal');
+
+subplot(2,2,3);
+stem(t, square(t));
+axis([-10,10,-1.2,1.2]);
+xlabel('Time');
+ylabel('square(t)');
+title('Square Signal');
+
+subplot(2,2,4);
+stem(t, exp(t));
+axis([-5,5,-0.1,100]);
+xlabel('Time');
+ylabel('exp(t)');
+title('Exponential Signal');
+
+
+
+figure(2)
+
+subplot(2,2,1);
+stem(t, sawtooth(t,0.5));
+axis([-10,10,-1.2,1.2]);
+xlabel('Time');
+ylabel('tri(t)');
+title('Triangular Signal');
+
+

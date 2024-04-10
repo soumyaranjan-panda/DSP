@@ -1,0 +1,26 @@
+clc;
+clear all;
+close all;
+
+x1=[1 2 3 4];
+x2=[2 3 3];
+t1=-4;
+t2=1;
+l=length(x1)+length(x2)-1;
+hold on
+subplot(221)
+stem(t1:1:length(x1)-1+t1,x1)
+subplot(222)
+stem(t2:1:length(x2)-1+t2,x2)
+
+for i=1:l
+    y(i)=0;
+    for j=1:length(x1)
+        if i-j+1>0 && i-j +1<=length(x2)
+        y(i)=y(i)+x1(j)*x2(i-j+1);
+        end
+    end
+end
+subplot(223)
+y
+stem(t1+t2:1:l-1+t1+t2,y)

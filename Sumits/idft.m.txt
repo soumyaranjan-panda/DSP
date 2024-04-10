@@ -1,0 +1,13 @@
+clc
+clear all
+close all
+
+x1=input('enter seq 1 -')
+
+Y=zeros(1,length(x1));
+for m=1:length(x1)
+    for k=1:length(x1)
+        Y(m)=Y(m)+x1(k)*exp(2*1i*pi*(m-1)*((k-1)/(length(x1))));
+    end
+end
+ disp(Y/length(x1))

@@ -1,0 +1,19 @@
+clc
+clear all
+close all
+
+xp1=input('enter seq 1 -')
+ 
+xp2=xp1(length(xp1):-1:1);
+
+y=zeros(1,2*length(xp1)-1);
+
+for i=1:length(xp1)
+    for j=1:length(xp2)
+        y(i+j-1)=y(i+j-1)+xp1(i)*xp2(j);
+    end
+end
+
+disp(y)
+
+
